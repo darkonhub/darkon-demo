@@ -1,13 +1,26 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+<div id="app">
+  <Navibar />
+  <router-view />
+  <Footer />
+</div>
 </template>
 
 <script>
+// import Navbar from '@/components/Navbar'
+import Navibar from '@/components/Navibar'
+import Footer from '@/components/Footer'
+
 export default {
-  name: 'app'
+  components: {
+    Navibar,
+    Footer
+  },
+  name: 'app',
+  data () {
+    return {
+    }
+  }
 }
 </script>
 
@@ -18,6 +31,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /*margin-top: 60px;*/
 }
 </style>
