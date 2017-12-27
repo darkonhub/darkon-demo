@@ -3,9 +3,9 @@
   <div class="container">
     <div class="content has-text-centered">
       <p>
-        <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+        <strong>Darkon</strong> by <a href="http://www.neosapience.com">Neosapience, Inc.</a> The source code is licensed
+        <a href="https://opensource.org/licenses/Apache-2.0">Apache 2.0</a>. The website content
+        is licensed <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY NC ND 4.0</a>.
       </p>
     </div>
   </div>
@@ -14,7 +14,6 @@
 
 <script>
 export default {
-  name: 'footer'
 }
 </script>
 

@@ -2,48 +2,31 @@
 <nav class="navbar">
   <div class="navbar-brand">
     <a class="navbar-item" href="http://localhost:8080">
-      <h2 class="subtitle has-text-white">Demo</h2>
-      <!--<img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">-->
+      <img src="/static/logo-h.png" alt="Darkon Demo" height="28">
     </a>
-    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample" @click="showNav = !showNav" :class="{'is-active': showNav}">
       <span></span>
       <span></span>
       <span></span>
     </div>
   </div>
 
-  <div id="navbarExampleTransparentExample" class="navbar-menu">
+  <div id="navbarExampleTransparentExample" class="navbar-menu" :class="{'is-active': showNav}">
     <div class="navbar-start">
       <a class="navbar-item" href="http://localhost:8080">
         Home
       </a>
+      <a class="navbar-item" href="http://darkon.io">
+        Doc
+      </a>
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="/documentation/overview/start/">
-          Docs
-        </a>
+        <router-link to="/overview" class="navbar-link">
+          Demo
+        </router-link>
         <div class="navbar-dropdown is-boxed">
-          <a class="navbar-item" href="/documentation/overview/start/">
-            Overview
-          </a>
-          <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
-            Modifiers
-          </a>
-          <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
-            Columns
-          </a>
-          <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
-            Layout
-          </a>
-          <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
-            Form
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
-            Elements
-          </a>
-          <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-            Components
-          </a>
+          <router-link to="/influence" class="navbar-item">
+            Upweighting Influence
+          </router-link>
         </div>
       </div>
     </div>
@@ -62,7 +45,7 @@
             </a>
           </p>
           <p class="control">
-            <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+            <a class="button is-primary" href="#">
               <span class="icon">
                 <i class="fa fa-download"></i>
               </span>
@@ -80,10 +63,20 @@
 export default {
   data () {
     return {
+      showNav: false
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/sass/main";
+
+.navbar {
+  @include touch {
+    .navbar-menu {
+      background-color: $primary;
+    }
+  }
+}
 </style>

@@ -72,3 +72,4 @@ __pycache__/
 
 *.rdb
 tmp/
+node_modules/

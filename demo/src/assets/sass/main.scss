@@ -1,0 +1,12 @@
+@import "flatly/bulmaswatch";
+
+// to use in javascript
+// https://blog.bluematador.com/posts/how-to-share-variables-between-js-and-sass/
+:export {
+  primary: $primary;
+  link: $link;
+  info: $info;
+  success: $success;
+  warning: $warning;
+  danger: $danger;
+}

@@ -1,21 +1,15 @@
 <template>
-<section class="section">
-  <div class="container">
-    <h1 class="title">
-      Hello World
-    </h1>
-    <p class="subtitle">
-      My first website with <strong>Bulma</strong>!
-    </p>
-    <p>
-       Link Info Success Warning Danger
-        <a class="button is-primary">Primary</a>
-        <a class="button is-link">Link</a>
-        <a class="button is-info">Info</a>
-        <a class="button is-success">Success</a>
-        <a class="button is-warning">Warning</a>
-        <a class="button is-danger">Danger</a>
-    </p>
+
+<section class="hero-img is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Full Height title
+      </h1>
+      <h2 class="subtitle">
+        Full Height subtitle
+      </h2>
+    </div>
   </div>
 </section>
 </template>
@@ -26,6 +20,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="sass">
+@import '../assets/sass/main.scss';
+
+.hero-img
+  @extend .hero
+  /*background: no-repeat center url("/static/logo-full.png")*/
+  /*background-size: contain*/
+
 
 </style>

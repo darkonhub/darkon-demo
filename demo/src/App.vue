@@ -7,7 +7,6 @@
 </template>
 
 <script>
-// import Navbar from '@/components/Navbar'
 import Navibar from '@/components/Navibar'
 import Footer from '@/components/Footer'
 
