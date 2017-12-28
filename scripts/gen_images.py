@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ========================================================================
+from cifar10_input import *
+
 import os
 import sys
 import json
 import numpy as np
 from scipy import misc
-
-from cifar10_input import *
 
 maybe_download_and_extract()
 

@@ -73,3 +73,5 @@ __pycache__/
 *.rdb
 tmp/
 node_modules/
+cifar10_data/
+

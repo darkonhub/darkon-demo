@@ -26,6 +26,12 @@ export default {
             display: true
           }
         }]
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        enabled: true
       }
     })
   }

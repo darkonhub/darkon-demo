@@ -12,8 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ========================================================================
+from cifar10_input import *
+
 import numpy as np
 import json
+
+maybe_download_and_extract()
+_, train_label = prepare_train_data(padding_size=0)
+
+_cifar10_classes = (
+    'airplane',
+    'automobile',
+    'bird',
+    'cat',
+    'deer',
+    'dog',
+    'frog',
+    'horse',
+    'ship',
+    'truck'
+)
 
 
 class NumpyEncoder(json.JSONEncoder):
@@ -39,6 +57,12 @@ for i, key in enumerate(demo_indices):
     d['pred'] = list(prediction_results[i])
     d['helpful'] = list(sorted_indices[-10:][::-1])
     d['harmful'] = list(sorted_indices[:10])
+
+    d['helpful_meta'] = list(train_label[d['helpful']])
+    d['helpful_meta'] = map(lambda x: _cifar10_classes[int(x)], d['helpful_meta'])
+
+    d['harmful_meta'] = list(train_label[d['harmful']])
+    d['harmful_meta'] = map(lambda x: _cifar10_classes[int(x)], d['harmful_meta'])
     demo_database.append(d)
 
 with open('demo_database.json', 'wt') as f:

@@ -39,11 +39,22 @@
   </div>
 
   <div class="container" id="report-influence">
-    <div class="content" v-show="showcase_step>=3">
+    <div v-show="showcase_step>=3">
       <hr>
       <p class="subtitle is-3">4. Upweighting Influence Result</p>
       <p class="subtitle is-4">{{ influence_info.title }}</p>
-      <img v-for="item in influence_info.samples" :src="item">
+      <div class="my-columns">
+        <div class="my-column" v-for="item, idx in subInfluenceInfo(0, 5)" :key="idx">
+          <img :src="item[0]">
+          <p>{{ item[1] }}</p>
+        </div>
+      </div>
+      <div class="my-columns">
+        <div class="my-column" v-for="item, idx in subInfluenceInfo(5, 10)" :key="idx">
+          <img :src="item[0]">
+          <p>{{ item[1] }}</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -71,9 +82,10 @@ export default {
     AccuracyChart
   },
 
-  data () {
-    return {
-      classes: [
+  props: {
+    classes: {
+      type: Array,
+      default: () => [
         'airplane',
         'automobile',
         'bird',
@@ -84,7 +96,20 @@ export default {
         'horse',
         'ship',
         'truck'
-      ],
+      ]
+    },
+    barColor: {
+      type: Array,
+      default: () => ['rgba(255, 99, 132, 0.4)', 'rgba(201, 203, 207, 0.4)']
+    },
+    barBorderColor: {
+      type: Array,
+      default: () => ['rgba(255, 99, 132, 1)', 'rgba(201, 203, 207, 1)']
+    }
+  },
+
+  data () {
+    return {
       targets: null,
       showcase_step: 0,
       influence_info: {
@@ -92,25 +117,13 @@ export default {
         samples: null
       },
       chartData: {
-        labels: [
-          'airplane',
-          'automobile',
-          'bird',
-          'cat',
-          'deer',
-          'dog',
-          'frog',
-          'horse',
-          'ship',
-          'truck'
-        ],
+        labels: this.classes,
         datasets: [
           {
-            label: 'test result',
-            backgroundColor: 'rgba(255, 99, 132, 0.4)',
-            borderColor: 'rgba(255,99,132,1)',
+            backgroundColor: null,
+            borderColor: null,
             borderWidth: 1,
-            data: [0.01, 0.02, 0.03, 0.9, 0.01, 0.01, 0.1, 0.01, 0.01, 0.01]
+            data: null
           }
         ]
       },
@@ -127,17 +140,14 @@ export default {
       self.database = response.data
 
       let targets = []
-      for (let i in self.classes) {
-        i = parseInt(i)
+      for (let i = 0; i < self.classes.length; i++) {
         let aClass = {name: self.classes[i], images: []}
-        for (let j in _.range(5)) {
-          j = parseInt(j)
+        for (let j of _.range(5)) {
           let row = self.database[i * 5 + j]
           aClass.images.push({src: '/static/test_images/' + row['key'] + '.png', selected: false})
         }
         targets.push(aClass)
       }
-
       self.targets = targets
     })
     .catch(function (error) {
@@ -153,22 +163,17 @@ export default {
         }
       }
 
-      let classIdx
-      for (let i in this.classes) {
-        if (this.classes[i] === className) {
-          classIdx = i
-          break
-        }
-      }
-
+      let classIdx = _.indexOf(this.classes, className)
       this.targets[classIdx].images[idx].selected = true
 
       let row = this.database[classIdx * 5 + idx]
-      this.results_helpful = _.map(row['helpful'], (i) => '/static/train_images/' + i + '.png')
-      this.results_harmful = _.map(row['harmful'], (i) => '/static/train_images/' + i + '.png')
+      this.results_helpful = _.zip(_.map(row['helpful'], (i) => '/static/train_images/' + i + '.png'), row['helpful_meta'])
+      this.results_harmful = _.zip(_.map(row['harmful'], (i) => '/static/train_images/' + i + '.png'), row['harmful_meta'])
 
       let chartData = _.clone(this.chartData)
       chartData.datasets[0].data = row.pred
+      chartData.datasets[0].backgroundColor = _.map(_.range(10), (i) => i === classIdx ? this.barColor[0] : this.barColor[1])
+      chartData.datasets[0].borderColor = _.map(_.range(10), (i) => i === classIdx ? this.barBorderColor[0] : this.barBorderColor[1])
       this.chartData = chartData
     },
 
@@ -180,6 +185,11 @@ export default {
     onSelectHarmfulSample () {
       this.influence_info.title = 'Harmful train samples: To increase loss'
       this.influence_info.samples = this.results_harmful
+    },
+
+    subInfluenceInfo (begin, end) {
+      if (!this.influence_info.samples) return []
+      return _.slice(this.influence_info.samples, begin, end)
     }
   }
 }
@@ -194,20 +204,33 @@ export default {
 
 #select-image
   img
-    width: 19%
+    width: 18.5%
+    margin: 2px
 
   .img-selectable
-    border: 3px solid #ffff
+    border: 1px solid #000
 
   .img-selectable:hover
-    border: 3px solid $primary
+    border: 5px solid darken($info, 20)
 
   .img-selected
-    border: 3px solid $info
+    border: 5px solid $info
 
-#report-influence img
-  width: 19%
-  border: 1px solid #000
-  margin: 2px
+#report-influence
+  .my-column
+    display: inline-block
+    width: 18.5%
+    border: 1px solid #000
+    margin: 2px 2px 10px 2px
+    background-color: #000
+    color: $white-ter
+
+  img
+    width: 100%
+
+  p
+    width: 100%
+    text-align: center
+
 
 </style>
