@@ -2,7 +2,7 @@
 <section class="section">
   <div class="container">
     <h1 class="title is-1">Demo for Upweighting influence function</h1>
-    <p>This demo shows ... </p>
+    <p>This demo shows an example usage of influence score. If you select pertained network and a specific test sample, you can see the prediction result and helpful or harmful training samples on the prediction. Training samples are sorted by influence scores, where highest (positive) values correspond to helpful samples and lowest (negative) values correspond to harmful samples.</p>
   </div>
 
   <div class="container content" id="select-network">
