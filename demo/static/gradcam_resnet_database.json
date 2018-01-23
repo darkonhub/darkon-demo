@@ -1,0 +1,116 @@
+[
+    {
+        "src": "static/gradcam/tooth_brush.png", 
+        "ret_guided_gradcam": [
+            [
+                "static/gradcam/resnet/tooth_brush/696_guided_gradcam.png", 
+                "paintbrush", 
+                0.6113414168357849
+            ], 
+            [
+                "static/gradcam/resnet/tooth_brush/328_guided_gradcam.png", 
+                "sea urchin", 
+                0.11774224787950516
+            ], 
+            [
+                "static/gradcam/resnet/tooth_brush/883_guided_gradcam.png", 
+                "vase", 
+                0.028559189289808273
+            ], 
+            [
+                "static/gradcam/resnet/tooth_brush/626_guided_gradcam.png", 
+                "lighter, light, igniter, ignitor", 
+                0.028034918010234833
+            ], 
+            [
+                "static/gradcam/resnet/tooth_brush/745_guided_gradcam.png", 
+                "projector", 
+                0.022840268909931183
+            ]
+        ], 
+        "ret_gradcam": [
+            [
+                "static/gradcam/resnet/tooth_brush/696_gradcam.png", 
+                "paintbrush", 
+                0.6113414168357849
+            ], 
+            [
+                "static/gradcam/resnet/tooth_brush/328_gradcam.png", 
+                "sea urchin", 
+                0.11774224787950516
+            ], 
+            [
+                "static/gradcam/resnet/tooth_brush/883_gradcam.png", 
+                "vase", 
+                0.028559189289808273
+            ], 
+            [
+                "static/gradcam/resnet/tooth_brush/626_gradcam.png", 
+                "lighter, light, igniter, ignitor", 
+                0.028034918010234833
+            ], 
+            [
+                "static/gradcam/resnet/tooth_brush/745_gradcam.png", 
+                "projector", 
+                0.022840268909931183
+            ]
+        ]
+    }, 
+    {
+        "src": "static/gradcam/cat_dog.png", 
+        "ret_guided_gradcam": [
+            [
+                "static/gradcam/resnet/cat_dog/282_guided_gradcam.png", 
+                "tiger cat", 
+                0.6136763691902161
+            ], 
+            [
+                "static/gradcam/resnet/cat_dog/242_guided_gradcam.png", 
+                "boxer", 
+                0.18346178531646729
+            ], 
+            [
+                "static/gradcam/resnet/cat_dog/246_guided_gradcam.png", 
+                "Great Dane", 
+                0.06109770014882088
+            ], 
+            [
+                "static/gradcam/resnet/cat_dog/281_guided_gradcam.png", 
+                "tabby, tabby cat", 
+                0.03178112581372261
+            ], 
+            [
+                "static/gradcam/resnet/cat_dog/243_guided_gradcam.png", 
+                "bull mastiff", 
+                0.02265797182917595
+            ]
+        ], 
+        "ret_gradcam": [
+            [
+                "static/gradcam/resnet/cat_dog/282_gradcam.png", 
+                "tiger cat", 
+                0.6136763691902161
+            ], 
+            [
+                "static/gradcam/resnet/cat_dog/242_gradcam.png", 
+                "boxer", 
+                0.18346178531646729
+            ], 
+            [
+                "static/gradcam/resnet/cat_dog/246_gradcam.png", 
+                "Great Dane", 
+                0.06109770014882088
+            ], 
+            [
+                "static/gradcam/resnet/cat_dog/281_gradcam.png", 
+                "tabby, tabby cat", 
+                0.03178112581372261
+            ], 
+            [
+                "static/gradcam/resnet/cat_dog/243_gradcam.png", 
+                "bull mastiff", 
+                0.02265797182917595
+            ]
+        ]
+    }
+]

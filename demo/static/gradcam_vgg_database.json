@@ -1,0 +1,116 @@
+[
+    {
+        "src": "static/gradcam/tooth_brush.png", 
+        "ret_guided_gradcam": [
+            [
+                "static/gradcam/vgg/tooth_brush/968_guided_gradcam.png", 
+                "cup", 
+                0.2340622842311859
+            ], 
+            [
+                "static/gradcam/vgg/tooth_brush/883_guided_gradcam.png", 
+                "vase", 
+                0.1794629842042923
+            ], 
+            [
+                "static/gradcam/vgg/tooth_brush/309_guided_gradcam.png", 
+                "bee", 
+                0.08798174560070038
+            ], 
+            [
+                "static/gradcam/vgg/tooth_brush/985_guided_gradcam.png", 
+                "daisy", 
+                0.05065315216779709
+            ], 
+            [
+                "static/gradcam/vgg/tooth_brush/711_guided_gradcam.png", 
+                "perfume, essence", 
+                0.02317158132791519
+            ]
+        ], 
+        "ret_gradcam": [
+            [
+                "static/gradcam/vgg/tooth_brush/968_gradcam.png", 
+                "cup", 
+                0.2340622842311859
+            ], 
+            [
+                "static/gradcam/vgg/tooth_brush/883_gradcam.png", 
+                "vase", 
+                0.1794629842042923
+            ], 
+            [
+                "static/gradcam/vgg/tooth_brush/309_gradcam.png", 
+                "bee", 
+                0.08798174560070038
+            ], 
+            [
+                "static/gradcam/vgg/tooth_brush/985_gradcam.png", 
+                "daisy", 
+                0.05065315216779709
+            ], 
+            [
+                "static/gradcam/vgg/tooth_brush/711_gradcam.png", 
+                "perfume, essence", 
+                0.02317158132791519
+            ]
+        ]
+    }, 
+    {
+        "src": "static/gradcam/cat_dog.png", 
+        "ret_guided_gradcam": [
+            [
+                "static/gradcam/vgg/cat_dog/254_guided_gradcam.png", 
+                "pug, pug-dog", 
+                0.6312209963798523
+            ], 
+            [
+                "static/gradcam/vgg/cat_dog/246_guided_gradcam.png", 
+                "Great Dane", 
+                0.09227436035871506
+            ], 
+            [
+                "static/gradcam/vgg/cat_dog/243_guided_gradcam.png", 
+                "bull mastiff", 
+                0.08042021095752716
+            ], 
+            [
+                "static/gradcam/vgg/cat_dog/242_guided_gradcam.png", 
+                "boxer", 
+                0.03575799986720085
+            ], 
+            [
+                "static/gradcam/vgg/cat_dog/178_guided_gradcam.png", 
+                "Weimaraner", 
+                0.03185566887259483
+            ]
+        ], 
+        "ret_gradcam": [
+            [
+                "static/gradcam/vgg/cat_dog/254_gradcam.png", 
+                "pug, pug-dog", 
+                0.6312209963798523
+            ], 
+            [
+                "static/gradcam/vgg/cat_dog/246_gradcam.png", 
+                "Great Dane", 
+                0.09227436035871506
+            ], 
+            [
+                "static/gradcam/vgg/cat_dog/243_gradcam.png", 
+                "bull mastiff", 
+                0.08042021095752716
+            ], 
+            [
+                "static/gradcam/vgg/cat_dog/242_gradcam.png", 
+                "boxer", 
+                0.03575799986720085
+            ], 
+            [
+                "static/gradcam/vgg/cat_dog/178_gradcam.png", 
+                "Weimaraner", 
+                0.03185566887259483
+            ]
+        ]
+    }
+]

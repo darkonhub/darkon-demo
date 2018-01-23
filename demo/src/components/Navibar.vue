@@ -17,13 +17,11 @@
         <!--Home-->
       <!--</a>-->
       <div class="navbar-item has-dropdown is-hoverable">
-        <router-link to="/" class="navbar-link">
-          Demo
-        </router-link>
+        <a @click="route('/')" class="navbar-link">Demo</a>
         <div class="navbar-dropdown is-boxed">
-          <router-link to="/" class="navbar-item">
-            Upweighting Influence
-          </router-link>
+          <a v-for="item, idx in demoList" class="navbar-item" :key="idx" @click="route(item[1])">
+            {{ item[0] }}
+          </a>
         </div>
       </div>
       <a class="navbar-item" href="http://darkon.io">
@@ -63,10 +61,20 @@
 </template>
 
 <script>
+import demoList from '../conf.js'
+
 export default {
   data () {
     return {
-      showNav: false
+      showNav: false,
+      demoList: demoList()
+    }
+  },
+
+  methods: {
+    route (location) {
+      this.showNav = false
+      this.$router.push(location)
     }
   }
 }

@@ -1,25 +1,27 @@
 <template>
 <section class="section">
   <div class="container">
-    <h1 class="title is-1">Demo for Upweighting influence function</h1>
-    <p>This demo shows an example usage of influence score. If you select pertained network and a specific test sample, you can see the prediction result and helpful or harmful training samples on the prediction. Training samples are sorted by influence scores, where highest (positive) values correspond to helpful samples and lowest (negative) values correspond to harmful samples.</p>
+    <h1 class="title is-1">Influence function for image</h1>
+    <p>
+      This demo shows an example usage of upweighting influence function of Darkon package. If you select pertained network and a specific test sample, you can see the prediction result and helpful or harmful training samples on the prediction. Training samples are sorted by influence scores, where highest (positive) values correspond to helpful samples and lowest (negative) values correspond to harmful samples.
+    </p>
   </div>
 
   <div class="container content" id="select-network">
     <hr>
-    <p class="subtitle is-3">1. Select Network</p>
+    <p class="title is-3">1. Select Network</p>
     <ul>
-      <li><a v-scroll-to="'#select-image'" @click="showcase_step=1">Resnet 110, CIFAR-10 dataset</a></li>
+      <li><a v-scroll-to="'#select-image'" @click="showcaseStep=1">Resnet 110, CIFAR-10 dataset</a></li>
     </ul>
   </div>
 
   <div class="container" id="select-image">
-    <div v-if="showcase_step>=1">
+    <div v-if="showcaseStep>=1">
       <hr>
-      <p class="subtitle is-3">2. Select test image</p>
+      <p class="title is-3">2. Select test image</p>
       <tabs :only-fade="false" ref="tabs" type="boxed">
         <tab-pane v-for="aClass, classIdx in targets" :label="aClass.name" :key="classIdx">
-          <a v-for="item, imgIdx in aClass.images" @click="showcase_step=2; onSelectTarget(aClass.name, imgIdx)" v-scroll-to="'#report-classification'">
+          <a v-for="item, imgIdx in aClass.images" @click="showcaseStep=2; onSelectTarget(aClass.name, imgIdx)" v-scroll-to="'#report-classification'">
             <img :src="item.src" :class="item.selected?'img-selected': ''" :key="imgIdx" class="img-selectable">
           </a>
         </tab-pane>
@@ -28,21 +30,21 @@
   </div>
 
   <div class="container" id="report-classification">
-    <div v-show="showcase_step>=2">
+    <div v-show="showcaseStep>=2">
       <hr>
-      <p class="subtitle is-3">3. Classification result</p>
+      <p class="title is-3">3. Classification result</p>
       <accuracy-chart :chartData="chartData" :width="400" :height="150"/>
       <br><br>
-      <button class="button is-success" v-scroll-to="'#report-influence'" @click="showcase_step=3; onSelectHelpfulSample()">Helpful samples</button>
-      <button class="button is-danger" v-scroll-to="'#report-influence'" @click="showcase_step=3; onSelectHarmfulSample()">Harmful samples</button>
+      <button class="button is-success" v-scroll-to="'#report-influence'" @click="showcaseStep=3; onSelectHelpfulSample()">Helpful samples</button>
+      <button class="button is-danger" v-scroll-to="'#report-influence'" @click="showcaseStep=3; onSelectHarmfulSample()">Harmful samples</button>
     </div>
   </div>
 
   <div class="container" id="report-influence">
-    <div v-show="showcase_step>=3">
+    <div v-show="showcaseStep>=3">
       <hr>
-      <p class="subtitle is-3">4. Upweighting Influence Result</p>
-      <p class="subtitle is-4">{{ influence_info.title }}</p>
+      <p class="title is-3">4. Upweighting Influence Result</p>
+      <p class="subtitle is-4">{{ influenceInfo.title }}</p>
       <div class="my-columns">
         <div class="my-column" v-for="item, idx in subInfluenceInfo(0, 5)" :key="idx">
           <img :src="item[0]">
@@ -59,9 +61,9 @@
   </div>
 
   <div class="container" id="tail">
-    <div v-show="showcase_step>=3">
+    <div v-show="showcaseStep>=3">
       <br>
-      <button class="button is-danger" v-scroll-to="'#select-network'" @click="showcase_step=0">Go to the first step</button>
+      <button class="button is-danger" v-scroll-to="'#select-network'" @click="gotoTop">Go to the first step</button>
     </div>
   </div>
 
@@ -111,8 +113,8 @@ export default {
   data () {
     return {
       targets: null,
-      showcase_step: 0,
-      influence_info: {
+      showcaseStep: 0,
+      influenceInfo: {
         title: '',
         samples: null
       },
@@ -127,8 +129,8 @@ export default {
           }
         ]
       },
-      results_helpful: null,
-      results_harmful: null,
+      resultsHelpful: null,
+      resultsHarmful: null,
       database: null
     }
   },
@@ -157,18 +159,13 @@ export default {
 
   methods: {
     onSelectTarget (className, idx) {
-      for (let classIdx in this.targets) {
-        for (let imgIdx in this.targets[classIdx].images) {
-          this.targets[classIdx].images[imgIdx].selected = false
-        }
-      }
-
+      this.clearSelectedData()
       let classIdx = _.indexOf(this.classes, className)
       this.targets[classIdx].images[idx].selected = true
 
       let row = this.database[classIdx * 5 + idx]
-      this.results_helpful = _.zip(_.map(row['helpful'], (i) => '/static/train_images/' + i + '.png'), row['helpful_meta'])
-      this.results_harmful = _.zip(_.map(row['harmful'], (i) => '/static/train_images/' + i + '.png'), row['harmful_meta'])
+      this.resultsHelpful = _.zip(_.map(row['helpful'], (i) => '/static/train_images/' + i + '.png'), row['helpful_meta'])
+      this.resultsHarmful = _.zip(_.map(row['harmful'], (i) => '/static/train_images/' + i + '.png'), row['harmful_meta'])
 
       let chartData = _.clone(this.chartData)
       chartData.datasets[0].data = row.pred
@@ -178,18 +175,31 @@ export default {
     },
 
     onSelectHelpfulSample () {
-      this.influence_info.title = 'Helpful train samples: To decrease loss'
-      this.influence_info.samples = this.results_helpful
+      this.influenceInfo.title = 'Helpful train samples: To decrease loss'
+      this.influenceInfo.samples = this.resultsHelpful
     },
 
     onSelectHarmfulSample () {
-      this.influence_info.title = 'Harmful train samples: To increase loss'
-      this.influence_info.samples = this.results_harmful
+      this.influenceInfo.title = 'Harmful train samples: To increase loss'
+      this.influenceInfo.samples = this.resultsHarmful
     },
 
     subInfluenceInfo (begin, end) {
-      if (!this.influence_info.samples) return []
-      return _.slice(this.influence_info.samples, begin, end)
+      if (!this.influenceInfo.samples) return []
+      return _.slice(this.influenceInfo.samples, begin, end)
+    },
+
+    clearSelectedData () {
+      for (let classIdx in this.targets) {
+        for (let imgIdx in this.targets[classIdx].images) {
+          this.targets[classIdx].images[imgIdx].selected = false
+        }
+      }
+    },
+
+    gotoTop () {
+      this.clearSelectedData()
+      this.showcaseStep = 0
     }
   }
 }
@@ -211,10 +221,10 @@ export default {
     border: 1px solid #000
 
   .img-selectable:hover
-    border: 5px solid darken($info, 20)
+    border: 5px solid darken($turquoise, 10)
 
   .img-selected
-    border: 5px solid $info
+    border: 5px solid $turquoise
 
 #report-influence
   .my-column

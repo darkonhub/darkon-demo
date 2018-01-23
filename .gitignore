@@ -74,4 +74,9 @@ __pycache__/
 tmp/
 node_modules/
 cifar10_data/
-
+*.ckpt
+*.tar.gz
+*.tar
+scripts/test/
+scripts/static/
+darkon.log
