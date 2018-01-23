@@ -26,7 +26,9 @@
       <aside class="menu content">
       <ul class="menu-list">
         <li v-for="item, idx in selectedDatabase" :key="idx">
-          <a :class="item.selected ? 'is-active' : null" v-scroll-to="'#report-gradcam'" @click="onNext(2, {dataIdx:idx})" >{{ item.src }}</a>
+          <a :class="item.selected ? 'is-active' : null" v-scroll-to="'#report-gradcam'" @click="onNext(2, {dataIdx:idx})" >
+            <b>{{ item.pred }}:</b> {{ item.src }}
+          </a>
         </li>
       </ul>
       </aside>

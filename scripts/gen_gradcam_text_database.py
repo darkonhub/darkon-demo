@@ -54,9 +54,9 @@ else:
 
 
 dataset = [
-    "an animation landmark as monumental as disney's 1937 breakthrough snow white and the seven dwarfs .",
-    "watching spirited away is like watching an eastern imagination explode .",
-    "goldmember is funny enough to justify the embarrassment of bringing a barf bag to the moviehouse .",
+    "it leaves little doubt that kidman has become one of our best actors .",
+    "exposing the ways we fool ourselves is one hour photo's real strength .",
+    "the lively appeal of the last kiss lies in the ease with which it integrates thoughtfulness and pasta-fagioli comedy .",
     "the movie is too amateurishly square to make the most of its own ironic implications .",
     "unfortunately , neither sendak nor the directors are particularly engaging or articulate .",
     "a zombie movie in every sense of the word--mindless , lifeless , meandering , loud , painful , obnoxious ."
